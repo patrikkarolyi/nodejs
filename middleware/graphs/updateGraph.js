@@ -1,7 +1,7 @@
 var requireOption = require('../common').requireOption;
 
 /**
- * Create a new edge, with the 2 given vertices
+ * Update on a graph's vertices and edge list
  */
 
 module.exports = function (objectrepository) {

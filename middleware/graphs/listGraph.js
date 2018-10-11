@@ -1,7 +1,7 @@
 var requireOption = require('../common').requireOption;
 
 /**
- * Get the graph list and put the inventories on res.tpl.employees
+ * Get all the graph objects
  */
 
 module.exports = function (objectrepository) {
