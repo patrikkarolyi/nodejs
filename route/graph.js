@@ -21,8 +21,6 @@ module.exports = function (app) {
         graphModel: graphModel
     };
 
-
-
     /**
      * Add new graph GET/PUSH
      */
