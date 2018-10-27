@@ -8,7 +8,7 @@ module.exports = function (app) {
     ///main route
     app.use('/', function (req, res, next) {
         next();
-    }, renderMW("index"));
+    }, renderMW("graphs"));
 
     ///user routes
 
