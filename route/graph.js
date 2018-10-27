@@ -26,7 +26,7 @@ module.exports = function (app) {
      */
     app.use('/graphs/new',
         createGraphMW(objectRepository),
-        renderMW(objectRepository, 'create a new graph'),
+        renderMW(objectRepository, 'graph_new'),
         function (req, res, next) {
             return res.redirect('/graphs/:graphid/edit');
         }
@@ -37,7 +37,7 @@ module.exports = function (app) {
      */
     app.use('/graphs/:graphid/edit',
         listGraphMW(objectRepository),
-        renderMW(objectRepository, 'edit a graph')
+        renderMW(objectRepository, 'graph_edit')
     );
 
     /**
@@ -62,7 +62,7 @@ module.exports = function (app) {
         getGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
-        renderMW(objectRepository, 'view a graph')
+        renderMW(objectRepository, 'graph_details')
     );
 
     /**
@@ -70,7 +70,7 @@ module.exports = function (app) {
      */
     app.use('/graphs',
         listGraphMW(objectRepository),
-        renderMW(objectRepository, 'list of graphs')
+        renderMW(objectRepository, 'graphs')
     );
 
 

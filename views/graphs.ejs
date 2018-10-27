@@ -1,6 +1,9 @@
 <% include header %>
 <main role="main">
 
+    <!-- For popup modul -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/popupwindow.css" />
+
   <%= JSON.stringify(objectRepository) %>
   
   <!-- Title section -->
@@ -55,7 +58,7 @@
       </div>
     </div>
     <div class="text-center">
-      <a id="btn_newgraph" href="graph_new.html" class="btn btn-lg btn-primary">New graph</a>
+      <a id="btn_newgraph" href="/graphs/new" class="btn btn-lg btn-primary">New graph</a>
     </div>
 
   </div>
