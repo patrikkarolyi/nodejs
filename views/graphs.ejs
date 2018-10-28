@@ -4,8 +4,6 @@
     <!-- For popup modul -->
     <link rel="stylesheet" type="text/css" media="screen" href="/popupwindow.css" />
 
-  <%= JSON.stringify(objectRepository) %>
-  
   <!-- Title section -->
   <section class="jumbotron text-center">
     <div class="container">
@@ -17,6 +15,7 @@
 
 
   <!-- Cardviews -->
+  <% objectRepository.graphModel.forEach(function(valami){ %>
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">
@@ -24,20 +23,20 @@
         <div class="col-md-12">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
-              <p class="card-title">MyCustomGraph</p>
-              <p class="card-text">Some comment on the graph which is great !</p>
+              <p class="card-title"><%= valami.name %></p>
+              <p class="card-text"><%= valami.desc %></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a class="btn btn-sm btn-outline-secondary" href="graph_details.html" id="btn_details">View</a>
                   <a class="btn btn-sm btn-outline-secondary" href="graph_edit.html" id="btn_edit">Edit</a>
                   <a class="btn btn-sm btn-outline-secondary" onclick="showPopup()">Delete</a>
                 </div>
-                <small class="text-muted">Created on : --:--:-- </small>
+                <small class="text-muted">Created on : <%= valami.created %> </small>
               </div>
             </div>
           </div>
         </div>
-
+        <% }) %>
         <div class="col-md-12">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
