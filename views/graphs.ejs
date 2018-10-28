@@ -1,8 +1,8 @@
 <% include header %>
 <main role="main">
 
-    <!-- For popup modul -->
-    <link rel="stylesheet" type="text/css" media="screen" href="/popupwindow.css" />
+  <!-- For popup modul -->
+  <link rel="stylesheet" type="text/css" media="screen" href="/popupwindow.css" />
 
   <!-- Title section -->
   <section class="jumbotron text-center">
@@ -15,47 +15,36 @@
 
 
   <!-- Cardviews -->
-  <% objectRepository.graphModel.forEach(function(valami){ %>
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row">
 
+        <% objectRepository.graphModel.forEach(function(valami){ %>
         <div class="col-md-12">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
-              <p class="card-title"><%= valami.name %></p>
-              <p class="card-text"><%= valami.desc %></p>
+              <p class="card-title">
+                <%= valami.name %>
+              </p>
+              <p class="card-text">
+                <%= valami.desc %>
+              </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="graph_details.html" id="btn_details">View</a>
-                  <a class="btn btn-sm btn-outline-secondary" href="graph_edit.html" id="btn_edit">Edit</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/details" %> id="btn_details">View</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/edit" %> id="btn_edit">Edit</a>
                   <a class="btn btn-sm btn-outline-secondary" onclick="showPopup()">Delete</a>
                 </div>
-                <small class="text-muted">Created on : <%= valami.created %> </small>
+                <small class="text-muted">Created on :
+                  <%= valami.created %> </small>
               </div>
             </div>
           </div>
         </div>
         <% }) %>
-        <div class="col-md-12">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body">
-              <p class="card-title">MyCustomGraph</p>
-              <p class="card-text">Some comment on the graph which is great !</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="graph_details.html" id="btn_details">View</a>
-                  <a class="btn btn-sm btn-outline-secondary" href="graph_edit.html" id="btn_edit">Edit</a>
-                  <a class="btn btn-sm btn-outline-secondary" onclick="showPopup()">Delete</a>
-                </div>
-                <small class="text-muted">Created on : --:--:-- </small>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
+
     <div class="text-center">
       <a id="btn_newgraph" href="/graphs/new" class="btn btn-lg btn-primary">New graph</a>
     </div>
@@ -69,8 +58,8 @@
       <span class="close">&times;</span>
       <p>Are you sure about that ?</p>
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="btn5">OK</button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="btn6">Cancel</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="popup_ok_btn">OK</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="popup_cancel_btn">Cancel</button>
       </div>
     </div>
   </div>
@@ -86,10 +75,10 @@
     span.onclick = function () {
       modal.style.display = "none";
     }
-    btn5.onclick = function () {
+    popup_ok_btn.onclick = function () {
       modal.style.display = "none";
     }
-    btn6.onclick = function () {
+    popup_cancel_btn.onclick = function () {
       modal.style.display = "none";
     }
   </script>

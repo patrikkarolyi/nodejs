@@ -15,10 +15,14 @@ var renderMW = require('../middleware/render');
 module.exports = function (app) {
 
     var graphModel = {};
+    var vertexModel = {};
+    var edgeModel = {};
 
     ///graph routes
     var objectRepository = {
-        graphModel: graphModel
+        graphModel: graphModel,
+        vertexModel: vertexModel,
+        edgeModel: edgeModel
     };
 
     /**
@@ -36,7 +40,9 @@ module.exports = function (app) {
      * Edit a graph GET/PUSH
      */
     app.use('/graphs/:graphid/edit',
-        listGraphMW(objectRepository),
+        getGraphMW(objectRepository),
+        getVertexMW(objectRepository),
+        getEdgeMW(objectRepository),
         renderMW(objectRepository, 'graph_edit')
     );
 
@@ -72,6 +78,5 @@ module.exports = function (app) {
         listGraphMW(objectRepository),
         renderMW(objectRepository, 'graphs')
     );
-
 
 }

@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
         {
             id: 1,
             name: "elsografom",
-            desc: "Ez az adat fog lent megjelenni!",
+            desc: "Itt valami értelmes komment fog megjelenni!",
             created: "2018.01.01"
         },
         {
@@ -18,6 +18,12 @@ module.exports = function (objectrepository) {
             name: "masodikgrafom",
             desc: "Kell egy description!",
             created: "2018.01.02"
+        },
+        {
+            id: 3,
+            name: "harmadikgrafom",
+            desc: "A komment.",
+            created: "2018.01.03"
         }
     ];
 
