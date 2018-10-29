@@ -6,7 +6,7 @@ module.exports = function (objectRepository,viewName) {
 
     return function (req, res) {
         //res.end('Render: ' + viewName);
-        res.render(viewName,{objectRepository: objectRepository});
+        res.render(viewName,{data: res.tlp});
     };
 
 };

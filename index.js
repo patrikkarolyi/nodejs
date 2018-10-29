@@ -6,8 +6,8 @@ app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 app.use('/', function(req,res,next){
-res.tlp = {};
-return next();
+  res.tlp = {};
+  return next();
 });
 
 

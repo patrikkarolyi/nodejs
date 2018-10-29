@@ -8,7 +8,7 @@
             <h2>Vertices</h2>
             <table class="table table-stripped">
                 <tbody>
-                    <% objectRepository.vertexModel.forEach(function(vertex){ %>
+                    <% data.vertexModel.forEach(function(vertex){ %>
                     <tr>
                         <td>
                             <%= vertex.name %>
@@ -28,7 +28,7 @@
             <h2>Edges</h2>
             <table class="table table-stripped">
                 <tbody>
-                        <% objectRepository.edgeModel.forEach(function(edge){ %>
+                        <% data.edgeModel.forEach(function(edge){ %>
                     <tr>
                         <td><%= edge.aname %></td>
                         <td><%= edge.bname %></td>
