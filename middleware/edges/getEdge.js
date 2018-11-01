@@ -34,6 +34,11 @@ module.exports = function (objectrepository) {
                 //demo
                 aname: "c_csucs",
                 bname: "d_csucs"
+            },
+            {
+                id: 2,
+                a: 0,
+                b: 2
             }
         ];
 

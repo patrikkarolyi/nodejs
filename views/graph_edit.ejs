@@ -30,8 +30,8 @@
                 <tbody>
                         <% data.edgeModel.forEach(function(edge){ %>
                     <tr>
-                        <td><%= edge.aname %></td>
-                        <td><%= edge.bname %></td>
+                        <td><%= data.vertexModel[edge.a].name %></td>
+                        <td><%= data.vertexModel[edge.b].name %></td>
                         <td class="text-right">
                             <a href="#" class="btn btn-sm btn-danger">Delete</a>
                         </td>

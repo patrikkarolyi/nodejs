@@ -13,27 +13,31 @@ module.exports = function (objectrepository) {
         res.tlp.vertexModel = [
             {
                 id: 0,
-                name: "a_csucs",
-                x: 100,
-                y: 100
+                name: "pomelo_csucs"
             },
             {
                 id: 1,
-                name: "b_csucs",
-                x: 200,
-                y: 200
+                name: "narancs_csucs"
             },
             {
                 id: 2,
-                name: "c_csucs",
-                x: 100,
-                y: 200
+                name: "citrom_csucs"
             },
             {
                 id: 3,
-                name: "d_csucs",
-                x: 200,
-                y: 100
+                name: "dinnye_csucs"
+            },
+            {
+                id: 4,
+                name: "alma_csucs"
+            },
+            {
+                id: 5,
+                name: "korte_csucs"
+            },
+            {
+                id: 6,
+                name: "banan_csucs"
             }
         ];
 
