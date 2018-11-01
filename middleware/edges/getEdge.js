@@ -12,25 +12,25 @@ module.exports = function (objectrepository) {
 
         res.tlp.edgeModel = [
             {
-                id: 1,
-                aid: 0,
-                bid: 1,
+                id: 0,
+                a: 0,
+                b: 1,
                 //demo
                 aname: "a_csucs",
                 bname: "b_csucs"
             },
             {
-                id: 2,
-                aid: 0,
-                bid: 1,
+                id: 1,
+                a: 1,
+                b: 2,
                 //demo
                 aname: "b_csucs",
                 bname: "c_csucs"
             },
             {
-                id: 3,
-                aid: 0,
-                bid: 1,
+                id: 2,
+                a: 2,
+                b: 3,
                 //demo
                 aname: "c_csucs",
                 bname: "d_csucs"

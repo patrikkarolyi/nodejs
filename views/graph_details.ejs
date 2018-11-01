@@ -1,24 +1,105 @@
 <% include header %>
 
-    <!-- p5.js -->
-    <script src="/p5js/p5.min.js"></script>
-    <script src="/p5js/p5.dom.min.js"></script>
-    <script src="/p5js/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/p5js/style.css">
+<!-- p5.js -->
+<script src="/p5js/p5.min.js"></script>
+<script src="/p5js/p5.dom.min.js"></script>
+<script src="/p5js/p5.sound.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/p5js/style.css">
 
 <h1>Graph details</h1>
 
 <div class="row">
-    <script src="/p5js/sketch.js"></script>
+	<script>
+	vertices = <%- JSON.stringify(data.vertexModel) %>
+
+	edges = <%- JSON.stringify(data.edgeModel) %>
+					
+var r = 50;
+var xOffset = 0.0;
+var yOffset = 0.0;
+var overSomething = false
+
+function setup() {
+	createCanvas(800, 400);
+	strokeWeight(3);
+	makeEdgeRefrences()
+}
+
+function makeEdgeRefrences(){
+	edges.forEach(function(edge) {
+		edge.a = vertices[edge.a]
+		edge.b = vertices[edge.b]
+	});
+}
+
+
+function draw() {
+	background(255, 255, 200);
+	overSomething = false;
+
+	edges.forEach(function(edge) {
+		stroke(0);
+		line(edge.a.x, edge.a.y, edge.b.x, edge.b.y);
+	});
+
+	vertices.forEach(function(vertex) {
+
+		var dx = vertex.x - mouseX;
+		var dy = vertex.y - mouseY;
+		if (dx * dx + dy * dy < r * r / 2) {
+			if (!overSomething) {
+				vertex.overBox = true;
+				overSomething = true;
+			}
+			text(vertex.id, 20, 20);
+			stroke(255, 156, 0);
+		} else {
+			stroke(0);
+			fill(30, 144, 255);
+			vertex.overBox = false;
+		}
+		ellipse(vertex.x, vertex.y, r, r);
+	});
+}
+
+function mousePressed() {
+	vertices.forEach(function(vertex) {
+		if (vertex.overBox) {
+			vertex.locked = true;
+			fill(255, 0, 0);
+			xOffset = mouseX - vertex.x;
+			yOffset = mouseY - vertex.y;
+			return;
+		} else {
+			vertex.locked = false;
+		}
+
+	});
+}
+
+function mouseDragged() {
+	vertices.forEach(function(vertex) {
+		if (vertex.locked) {
+			vertex.x = mouseX - xOffset;
+			vertex.y = mouseY - yOffset;
+		}
+	});
+}
+
+function mouseReleased() {
+	vertices.forEach(function(vertex) {
+		vertex.locked = false;
+	});
+}
+	</script>
 </div>
 <div></div>
-
 
 <button class="btn btn-sm btn-warning" onclick="goBack()">Go Back</button>
 
 <script>
-    function goBack() {
-        window.history.back();
-    }
+	function goBack() {
+		window.history.back();
+	}
 </script>
 <% include footer %>

@@ -6,7 +6,7 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    var graphModel = requireOption(objectrepository, 'graphModel');
+    //var graphModel = requireOption(objectrepository, 'graphModel');
 
     return function (req, res, next) {
 

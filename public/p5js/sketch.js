@@ -17,7 +17,7 @@ vertices = [{
 		y: 300,
 		overBox: false,
 		locked: false,
-		id: "ez egy kurvahosszu szoveg aminek ki kell fernie !!!!!"
+		id: 2
 	}
 ]
 
