@@ -1,5 +1,6 @@
 ///require middlewares
 var getGraphMW = require('../middleware/graphs/getGraph');
+var updateGraphMW = require('../middleware/graphs/updateGraph');
 
 var deleteVertexMW = require('../middleware/vertices/deleteVertex');
 var createVertexMW = require('../middleware/vertices/createVertex');

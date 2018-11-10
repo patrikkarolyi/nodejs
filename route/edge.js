@@ -8,11 +8,13 @@ var createEdgeMW = require('../middleware/edges/createEdge');
 module.exports = function (app) {
 
     var graphModel = {};
+    var vertexModel = {};
     var edgeModel = {};
 
-    ///vertex routes
+    ///graph routes
     var objectRepository = {
         graphModel: graphModel,
+        vertexModel: vertexModel,
         edgeModel: edgeModel
     };
 
