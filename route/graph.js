@@ -28,7 +28,7 @@ module.exports = function (app) {
     /**
      * Add new graph GET/PUSH
      */
-    app.use('/graphs/new',
+    app.get('/graphs/new',
         createGraphMW(objectRepository),
         renderMW(objectRepository, 'graph_new'),
         function (req, res, next) {
