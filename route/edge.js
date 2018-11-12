@@ -19,9 +19,9 @@ module.exports = function (app) {
     };
 
     /**
-     * Add new edge GET/PUSH
+     * Add new edge GET/post
      */
-    app.use('/graphs/:graphid/edit/edges/new',
+    app.get('/graphs/:graphid/edit/edges/new',
         ///TODO check if vertices exist
         createEdgeMW(objectRepository),
         getGraphMW(objectRepository),
