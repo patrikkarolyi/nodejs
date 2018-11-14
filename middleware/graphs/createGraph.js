@@ -14,15 +14,13 @@ module.exports = function (objectrepository) {
             _vertices: [],
             _edges: [],
             name: req.body.graphname,
-            comment: "Ez egy nagyszerű demo graph" });
+            comment: req.body.graphcomment });
 
 
         graph.save(function (err) {
-            console.log('GRAPH');
+            console.log(req.body.graphname + " created as a graph.")
         });
 
-
-        console.log(req.body.graphname + " created as a graph.")
         return next();
     };
 
