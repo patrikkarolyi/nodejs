@@ -10,15 +10,14 @@ var deleteVertexMW = require('../middleware/vertices/deleteVertex');
 var getEdgeMW = require('../middleware/edges/getEdge');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
+
 var renderMW = require('../middleware/render');
 
 module.exports = function (app) {
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
-
-    ///graph routes
     var objectRepository = {
         graphModel: graphModel,
         vertexModel: vertexModel,
@@ -30,13 +29,9 @@ module.exports = function (app) {
      */
     app.get('/graphs/new',
         renderMW(objectRepository, 'graph_new'),
-        function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
-        }
     );
     app.post('/graphs/new',
     createGraphMW(objectRepository),
-    renderMW(objectRepository, 'graph_new'),
     function (req, res, next) {
         return res.redirect('/graphs/3/edit');
     }
