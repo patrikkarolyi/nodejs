@@ -28,13 +28,19 @@ module.exports = function (app) {
     /**
      * Add new graph GET/PUSH
      */
-    app.use('/graphs/new',
-        createGraphMW(objectRepository),
+    app.get('/graphs/new',
         renderMW(objectRepository, 'graph_new'),
         function (req, res, next) {
             return res.redirect('/graphs/:graphid/edit');
         }
     );
+    app.post('/graphs/new',
+    createGraphMW(objectRepository),
+    renderMW(objectRepository, 'graph_new'),
+    function (req, res, next) {
+        return res.redirect('/graphs/3/edit');
+    }
+);
 
     /**
      * Edit a graph GET/PUSH
