@@ -19,24 +19,24 @@
     <div class="container">
       <div class="row">
 
-        <% data.graphModel.forEach(function(valami){ %>
+        <% data.graphs.forEach(function(graph){ %>
         <div class="col-md-12">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
               <p class="card-title">
-                <%= valami.name %>
+                <%= graph.name %>
               </p>
               <p class="card-text">
-                <%= valami.desc %>
+                <%= graph.comment %>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/details" %> id="btn_details">View</a>
-                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/edit" %> id="btn_edit">Edit</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + graph._id + "/details" %> id="btn_details">View</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + graph._id + "/edit" %> id="btn_edit">Edit</a>
                   <a class="btn btn-sm btn-outline-secondary" onclick="showPopup()">Delete</a>
                 </div>
                 <small class="text-muted">Created on :
-                  <%= valami.created %> </small>
+                  <%= graph.date %> </small>
               </div>
             </div>
           </div>
