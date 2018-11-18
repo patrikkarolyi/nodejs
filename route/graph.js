@@ -56,7 +56,6 @@ module.exports = function (app) {
         deleteVertexMW(objectRepository),
         deleteEdgeMW(objectRepository),
         deleteGraphMW(objectRepository),
-        renderMW(objectRepository, 'delete a graph'),
         function (req, res, next) {
             return res.redirect('/graphs');
         }
