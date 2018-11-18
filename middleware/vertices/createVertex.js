@@ -6,9 +6,18 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    var graphModel = requireOption(objectrepository, 'graphModel');
+    var vertexModel = requireOption(objectrepository, 'vertexModel');
 
     return function (req, res, next) {
+
+        var vertex = new vertexModel({
+            name: req.body.vertexname
+        });
+
+
+        vertex.save(function (err) {
+            console.log(req.body.vertexname + " created as a vertex.")
+        });
 
         return next();
     };

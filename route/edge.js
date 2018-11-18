@@ -21,7 +21,7 @@ module.exports = function (app) {
     /**
      * Add new edge GET/post
      */
-    app.get('/graphs/:graphid/edit/edges/new',
+    app.post('/graphs/:graphid/edit/edges/new',
         ///TODO check if vertices exist
         createEdgeMW(objectRepository),
         getGraphMW(objectRepository),
@@ -34,7 +34,7 @@ module.exports = function (app) {
     /**
      * Delete an edge GET
      */
-    app.use('/graphs/:graphid/edit/edges/:edgeid/delete',
+    app.get('/graphs/:graphid/edit/edges/:edgeid/delete',
         deleteEdgeMW(objectRepository),
         getGraphMW(objectRepository),
         updateGraphMW(objectRepository),

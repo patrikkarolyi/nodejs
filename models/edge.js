@@ -8,7 +8,7 @@ var Edge = db.model('Edge', {
   },
   _b: {
     type: Schema.Types.ObjectId,
-    ref: 'Edge'
+    ref: 'Vertex'
   }
 });
 

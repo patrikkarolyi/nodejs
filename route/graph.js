@@ -25,7 +25,7 @@ module.exports = function (app) {
     };
 
     /**
-     * Add new graph GET/PUSH
+     * Add new graph GET/POST
      */
     app.get('/graphs/new',
         renderMW(objectRepository, 'graph_new'),
@@ -38,10 +38,10 @@ module.exports = function (app) {
 );
 
     /**
-     * Edit a graph GET/PUSH
+     * Edit a graph GET
      */
-    app.use('/graphs/:graphid/edit',
-        getGraphMW(objectRepository),
+    app.get('/graphs/:graphid/edit',
+        listGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
         renderMW(objectRepository, 'graph_edit')
@@ -50,7 +50,7 @@ module.exports = function (app) {
     /**
      * Delete a graph GET
      */
-    app.use('/graphs/:graphid/delete',
+    app.get('/graphs/:graphid/delete',
         //get vertex and edge ids
         getGraphMW(objectRepository),
         deleteVertexMW(objectRepository),
@@ -65,7 +65,7 @@ module.exports = function (app) {
     /**
      * View a graph GET
      */
-    app.use('/graphs/:graphid/details',
+    app.get('/graphs/:graphid/details',
         getGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
@@ -75,7 +75,7 @@ module.exports = function (app) {
     /**
      * List all graphs GET
      */
-    app.use('/graphs',
+    app.get('/graphs',
         listGraphMW(objectRepository),
         renderMW(objectRepository, 'graphs')
     );

@@ -7,11 +7,11 @@ var createVertexMW = require('../middleware/vertices/createVertex');
 
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 
-module.exports = function (app) {
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
+module.exports = function (app) {
 
     ///vertex routes
     var objectRepository = {
@@ -21,9 +21,9 @@ module.exports = function (app) {
     };
 
     /**
-    * Add new vertex GET/PUSH
+    * Add new vertex POST
     */
-    app.use('/graphs/:graphid/edit/vertice/new',
+    app.post('/graphs/:graphid/edit/vertices/new',
         createVertexMW(objectRepository),
         getGraphMW(objectRepository),
         updateGraphMW(objectRepository),
@@ -32,10 +32,11 @@ module.exports = function (app) {
         }
     );
 
+
     /**
      * Delete a vertex and edges related to it GET
      */
-    app.use('/graphs/:graphid/edit/vertices/:vertexid/delete',
+    app.get('/graphs/:graphid/edit/vertices/:vertexid/delete',
         deleteEdgeMW(objectRepository),
         deleteVertexMW(objectRepository),
         getGraphMW(objectRepository),

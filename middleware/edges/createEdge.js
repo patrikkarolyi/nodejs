@@ -10,6 +10,16 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
+        var edge = new edgeModel({
+            _a: req.body.vertexa,
+            _b: req.body.vertexb
+        });
+
+
+        graph.save(function (err) {
+            console.log("an edge created.")
+        });
+
         return next();
     };
 
