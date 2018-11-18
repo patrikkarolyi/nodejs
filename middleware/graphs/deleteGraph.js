@@ -10,7 +10,7 @@ module.exports = function (objectrepository) {
 
     return function (req, res, next) {
 
-        console.error("deleted " + req.params.graphid + "graph");
+        console.error("deleted graph: " + req.params.graphid);
         graphModel.remove({ _id: req.params.graphid }).exec();
 
         return next();

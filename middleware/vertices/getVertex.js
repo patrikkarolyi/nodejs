@@ -6,11 +6,20 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    //var graphModel = requireOption(objectrepository, 'graphModel');
+    var vertexModel = requireOption(objectrepository, 'vertexModel');
+    var result = [];
 
     return function (req, res, next) {
 
-        res.tlp.vertexModel = [
+        vertexModel.find({},function (err, vertices) {
+            result = vertices;
+        });
+
+        res.tlp.vertices = result;
+        return next();
+
+
+        /*res.tlp.vertexModel = [
             {
                 id: 0,
                 name: "pomelo_csucs"
@@ -39,7 +48,7 @@ module.exports = function (objectrepository) {
                 id: 6,
                 name: "banan_csucs"
             }
-        ];
+        ];*/
 
         return next();
     };
