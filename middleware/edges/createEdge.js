@@ -8,7 +8,7 @@ module.exports = function (objectrepository) {
 
     var edgeModel = requireOption(objectrepository, 'edgeModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
         var edge = new edgeModel({
             _a: req.body.selectora,
@@ -16,7 +16,7 @@ module.exports = function (objectrepository) {
         });
 
 
-        edge.save(function (err) {
+        await edge.save(function (err) {
             console.log("an edge created with" )
         });
 

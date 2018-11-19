@@ -8,14 +8,14 @@ module.exports = function (objectrepository) {
 
     var vertexModel = requireOption(objectrepository, 'vertexModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
         var vertex = new vertexModel({
             name: req.body.vertexname
         });
 
 
-        vertex.save(function (err) {
+        await vertex.save(function (err) {
             console.log(req.body.vertexname + " created as a vertex.")
         });
 

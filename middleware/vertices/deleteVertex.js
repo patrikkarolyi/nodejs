@@ -8,10 +8,10 @@ module.exports = function (objectrepository) {
 
     var vertexModel = requireOption(objectrepository, 'vertexModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
-        console.error("deleted vertex: " + req.params.vertexid);
-        vertexModel.remove({ _id: req.params.vertexid }).exec();
+        console.log("deleted vertex: " + req.params.vertexid);
+        await vertexModel.remove({ _id: req.params.vertexid });
 
         return next();
     };

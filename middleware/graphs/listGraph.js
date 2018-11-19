@@ -10,14 +10,24 @@ module.exports = function (objectrepository) {
     var graphModel = requireOption(objectrepository, 'graphModel');
     var result =[];
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
         
-        graphModel.find({},function (err, graphs) {
-            result = graphs;
-        });
+        /*graphModel.find({},function (err, graphs) {
+            if(err){
+                return next(err);
+            }
+            res.tlp.graphs = graphs;
+            return next();
+        });*/
 
-        res.tlp.graphs = result;
-        return next();
+        try {
+            res.tlp.graphs = await graphModel.find();
+            next();
+        }catch (e) {
+            return next(e);
+        }
+
+
     };
 
 };

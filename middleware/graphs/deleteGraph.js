@@ -8,10 +8,10 @@ module.exports = function (objectrepository) {
 
     var graphModel = requireOption(objectrepository, 'graphModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
-        console.error("deleted graph: " + req.params.graphid);
-        graphModel.remove({ _id: req.params.graphid }).exec();
+        console.log("deleted graph: " + req.params.graphid);
+        await graphModel.remove({ _id: req.params.graphid });
 
         return next();
     };

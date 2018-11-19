@@ -8,7 +8,7 @@ module.exports = function (objectrepository) {
 
     var graphModel = requireOption(objectrepository, 'graphModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
         var graph = new graphModel({
             _vertices: [],
@@ -17,7 +17,7 @@ module.exports = function (objectrepository) {
             comment: req.body.graphcomment });
 
 
-        graph.save(function (err) {
+        await graph.save(function (err) {
             console.log(req.body.graphname + " created as a graph.")
         });
 
