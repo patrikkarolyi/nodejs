@@ -24,11 +24,11 @@ module.exports = function (app) {
      */
     app.post('/graphs/:graphid/edit/edges/new',
         ///TODO check if vertices exist
-        createEdgeMW(objectRepository),
         getGraphMW(objectRepository),
+        createEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/' +req.params.graphid+ '/edit');
         }
     );
 
@@ -40,7 +40,7 @@ module.exports = function (app) {
         getGraphMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/'+req.params.graphid+'/edit');
         }
     );
 

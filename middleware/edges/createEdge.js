@@ -15,9 +15,10 @@ module.exports = function (objectrepository) {
             _b: req.body.selectorb
         });
 
+        res.tlp.graph._edges.push(edge._id);
 
         await edge.save(function (err) {
-            console.log("an edge created with" )
+            console.log(edge._id+ " created as an edge" )
         });
 
         return next();
