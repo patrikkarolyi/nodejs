@@ -5,11 +5,12 @@ var updateGraphMW = require('../middleware/graphs/updateGraph');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 var createEdgeMW = require('../middleware/edges/createEdge');
 
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
+
 module.exports = function (app) {
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
 
     ///graph routes
     var objectRepository = {

@@ -6,9 +6,12 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    var graphModel = requireOption(objectrepository, 'graphModel');
+    var vertexModel = requireOption(objectrepository, 'vertexModel');
 
     return function (req, res, next) {
+
+        console.error("deleted vertex: " + req.params.vertexid);
+        vertexModel.remove({ _id: req.params.vertexid }).exec();
 
         return next();
     };

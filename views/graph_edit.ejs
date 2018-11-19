@@ -14,7 +14,7 @@
                             <%= vertex.name %>
                         </td>
                         <td class="text-right">
-                            <button href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href= <%= "/graphs/" +"3"+ "/edit/vertices/"+vertex._id+"/delete" %>  class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <% }) %>
@@ -59,18 +59,18 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-5">
-                                <select class="custom-select d-block w-100" id="vertexa" required="true">
+                                <select class="custom-select d-block w-100" name=selectora id="vertexa">
                                     <% data.vertices.forEach(function(vertex){ %>
-                                    <option valuea=<%=vertex._id %>>
+                                    <option value=<%=vertex._id %>>
                                         <%= vertex.name %>
                                     </option>
                                     <% }) %>
                                 </select>
                             </div>
                             <div class="col-md-5">
-                                <select class="custom-select d-block w-100" id="vertexb" required="true">
+                                <select class="custom-select d-block w-100" name=selectorb id="vertexb">
                                     <% data.vertices.forEach(function(vertex){ %>
-                                    <option valueb=<%=vertex._id %>>
+                                    <option value=<%=vertex._id %>>
                                         <%= vertex.name %>
                                     </option>
                                     <% }) %>

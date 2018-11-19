@@ -6,18 +6,18 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    var graphModel = requireOption(objectrepository, 'graphModel');
+    var edgeModel = requireOption(objectrepository, 'edgeModel');
 
     return function (req, res, next) {
 
         var edge = new edgeModel({
-            _a: req.body.vertexa,
-            _b: req.body.vertexb
+            _a: req.body.selectora,
+            _b: req.body.selectorb
         });
 
 
-        graph.save(function (err) {
-            console.log("an edge created.")
+        edge.save(function (err) {
+            console.log("an edge created with" )
         });
 
         return next();

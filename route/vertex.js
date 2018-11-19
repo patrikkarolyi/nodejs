@@ -39,10 +39,10 @@ module.exports = function (app) {
     app.get('/graphs/:graphid/edit/vertices/:vertexid/delete',
         deleteEdgeMW(objectRepository),
         deleteVertexMW(objectRepository),
-        getGraphMW(objectRepository),
+        //getGraphMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/'+ req.params.vertexid +'/edit');
         }
     );
 
