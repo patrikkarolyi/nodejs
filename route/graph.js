@@ -33,7 +33,7 @@ module.exports = function (app) {
     app.post('/graphs/new',
     createGraphMW(objectRepository),
     function (req, res, next) {
-        return res.redirect('/graphs/3/edit');
+        return res.redirect('/graphs/'+res.tlp.graph._id + '/edit');
     }
 );
 

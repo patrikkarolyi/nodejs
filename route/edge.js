@@ -36,8 +36,8 @@ module.exports = function (app) {
      * Delete an edge GET
      */
     app.get('/graphs/:graphid/edit/edges/:edgeid/delete',
-        deleteEdgeMW(objectRepository),
         getGraphMW(objectRepository),
+        deleteEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
             return res.redirect('/graphs/'+req.params.graphid+'/edit');

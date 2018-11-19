@@ -6,11 +6,35 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    //var graphModel = requireOption(objectrepository, 'graphModel');
+    var edgeModel = requireOption(objectrepository, 'edgeModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
-        res.tlp.edgeModel = [
+        try {
+
+            async function asyncForEach(array, callback) {
+                for (let index = 0; index < array.length; index++) {
+                    await callback(array[index], index, array);
+                }
+            }
+
+            const start = async() => {
+                res.tlp.edges = [];
+
+                await asyncForEach(res.tlp.graph._edges, async  (edgeid) =>  {
+                    var edgeObject = await edgeModel.findOne({_id: edgeid});
+                    if(edgeObject)
+                        res.tlp.edges.push(edgeObject);
+                });
+                next();
+            };
+            start();
+        } catch (e) {
+            return next(e);
+        }
+
+
+        /*res.tlp.edgeModel = [
             {
                 id: 0,
                 a: 0,
@@ -40,9 +64,8 @@ module.exports = function (objectrepository) {
                 a: 0,
                 b: 2
             }
-        ];
+        ];*/
 
-        return next();
     };
 
 };

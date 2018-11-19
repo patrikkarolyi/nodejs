@@ -37,9 +37,9 @@ module.exports = function (app) {
      * Delete a vertex and edges related to it GET
      */
     app.get('/graphs/:graphid/edit/vertices/:vertexid/delete',
-        deleteEdgeMW(objectRepository),
         getGraphMW(objectRepository),
         deleteVertexMW(objectRepository),
+        deleteEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
             return res.redirect('/graphs/'+ req.params.graphid +'/edit');

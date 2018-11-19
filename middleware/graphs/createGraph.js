@@ -16,6 +16,7 @@ module.exports = function (objectrepository) {
             name: req.body.graphname,
             comment: req.body.graphcomment });
 
+        res.tlp.graph = graph;
 
         await graph.save(function (err) {
             console.log(req.body.graphname + " created as a graph.")

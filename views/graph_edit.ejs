@@ -39,16 +39,16 @@
             <h2>Edges</h2>
             <table class="table table-stripped">
                 <tbody>
-                    <% data.edgeModel.forEach(function(edge){ %>
+                    <% data.edges.forEach(function(edge){ %>
                     <tr>
                         <td>
-                            <%= "data.vertices[0].name" %>
+                            <%= data.vertices.filter(function (element) {return element.id == edge._a;})[0].name %>
                         </td>
                         <td>
-                            <%= "data.vertices[0].name" %>
+                            <%= data.vertices.filter(function (element) {return element.id == edge._b;})[0].name %>
                         </td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href= <%= "/graphs/" +data.graph._id+ "/edit/edges/"+edge._id+"/delete" %>  class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <% }) %>
