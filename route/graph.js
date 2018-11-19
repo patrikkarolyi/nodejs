@@ -41,7 +41,7 @@ module.exports = function (app) {
      * Edit a graph GET
      */
     app.get('/graphs/:graphid/edit',
-        listGraphMW(objectRepository),
+        getGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
         renderMW(objectRepository, 'graph_edit')

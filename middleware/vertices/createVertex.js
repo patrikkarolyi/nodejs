@@ -14,6 +14,7 @@ module.exports = function (objectrepository) {
             name: req.body.vertexname
         });
 
+        res.tlp.graph._vertices.push(vertex._id);
 
         await vertex.save(function (err) {
             console.log(req.body.vertexname + " created as a vertex.")

@@ -10,8 +10,13 @@ module.exports = function (objectrepository) {
 
     return async function (req, res, next) {
 
+        var index = res.tlp.graph._vertices.indexOf(req.params.vertexid);
+        if (index > -1) {
+            res.tlp.graph._vertices.splice(index, 1);
+        }
+
         console.log("deleted vertex: " + req.params.vertexid);
-        await vertexModel.remove({ _id: req.params.vertexid });
+        await vertexModel.deleteOne({ _id: req.params.vertexid });
 
         return next();
     };

@@ -11,9 +11,25 @@ module.exports = function (objectrepository) {
     return async function (req, res, next) {
 
         try {
-            res.tlp.vertices = await await vertexModel.find({});
-            next();
-        }catch (e) {
+
+            async function asyncForEach(array, callback) {
+                for (let index = 0; index < array.length; index++) {
+                    await callback(array[index], index, array);
+                }
+            }
+
+            const start = async() => {
+                res.tlp.vertices = [];
+
+                await asyncForEach(res.tlp.graph._vertices, async  (vertexid) =>  {
+                    var vertexObject = await vertexModel.findOne({_id: vertexid});
+                    if(vertexObject)
+                    res.tlp.vertices.push(vertexObject);
+                });
+                next();
+            };
+            start();
+        } catch (e) {
             return next(e);
         }
 
