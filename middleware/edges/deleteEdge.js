@@ -17,7 +17,7 @@ module.exports = function (objectrepository) {
         }
 
         //explicit edge delete
-        if(req.params.edgeid) {
+        if (req.params.edgeid) {
             var index = res.tlp.graph._edges.indexOf(req.params.edgeid);
             if (index > -1) {
                 res.tlp.graph._edges.splice(index, 1);
@@ -29,31 +29,28 @@ module.exports = function (objectrepository) {
         }
 
         //edge delete due to vertex delete
-        if(req.params.vertexid){
-            var edgesToDelete = res.tlp.graph._edges.filter(function(edge){return edge._a==req.params.vertexid || edge._b==req.params.vertexid});
-            console.log("edge delete due to vertex delete");
+        if (req.params.vertexid) {
+
+            var edgesToDelete = res.tlp.edges.filter(function (edge) {
+                return edge._a == req.params.vertexid || edge._b == req.params.vertexid
+            });
+
+            asyncForEach(edgesToDelete, async function (edge) {
 
 
-            //TODO DELETE EDGES
-            asyncForEach(edgesToDelete,async function(edge){
-                console.log("edge delete "+edge._id);
-
+                //delete from graph
                 var index = res.tlp.graph._edges.indexOf(edge._id);
                 if (index > -1) {
                     res.tlp.graph._edges.splice(index, 1);
                 }
 
-                console.log("deleted edge: " + edge._id);
-                await edgeModel.delete({_id: edge._id});
+
+                //delete from mongo
+                console.log("deleted edge: " + edge._id + "due to vertex delete");
+                await edgeModel.deleteOne({_id: edge._id});
             });
 
-
-
         }
-
-
-
-
         return next();
     };
 

@@ -5,6 +5,7 @@ var updateGraphMW = require('../middleware/graphs/updateGraph');
 var deleteVertexMW = require('../middleware/vertices/deleteVertex');
 var createVertexMW = require('../middleware/vertices/createVertex');
 
+var getEdgeMW = require('../middleware/edges/getEdge');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 
 var graphModel = require('../models/graph');
@@ -39,6 +40,7 @@ module.exports = function (app) {
     app.get('/graphs/:graphid/edit/vertices/:vertexid/delete',
         getGraphMW(objectRepository),
         deleteVertexMW(objectRepository),
+        getEdgeMW(objectRepository),
         deleteEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
