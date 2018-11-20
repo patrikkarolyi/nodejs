@@ -1,7 +1,14 @@
 <% include header %>
-<h1>New Graph</h1>
+
 
 <div class="container">
+        <h1>New Graph</h1>
+
+        <p>You will create a new graph with the given name and comment on it.
+            <br> By default there will be no vertices and edges with it.
+            <br> Just an empty graph.
+        </p>
+
     <form class="form-horizontal" method="POST" action="/graphs/new">
         <div class="form-group">
             <label class="control-label col-sm-2">Name:</label>
@@ -17,7 +24,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button  class="btn btn-sm btn-success">Create</button>
+                <button class="btn btn-sm btn-success">Create</button>
             </div>
         </div>
     </form>
