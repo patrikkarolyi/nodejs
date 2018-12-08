@@ -10,15 +10,14 @@ var deleteVertexMW = require('../middleware/vertices/deleteVertex');
 var getEdgeMW = require('../middleware/edges/getEdge');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
+
 var renderMW = require('../middleware/render');
 
 module.exports = function (app) {
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
-
-    ///graph routes
     var objectRepository = {
         graphModel: graphModel,
         vertexModel: vertexModel,
@@ -26,26 +25,22 @@ module.exports = function (app) {
     };
 
     /**
-     * Add new graph GET/PUSH
+     * Add new graph GET/POST
      */
     app.get('/graphs/new',
         renderMW(objectRepository, 'graph_new'),
-        function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
-        }
     );
     app.post('/graphs/new',
     createGraphMW(objectRepository),
-    renderMW(objectRepository, 'graph_new'),
     function (req, res, next) {
-        return res.redirect('/graphs/3/edit');
+        return res.redirect('/graphs/'+res.tlp.graph._id + '/edit');
     }
 );
 
     /**
-     * Edit a graph GET/PUSH
+     * Edit a graph GET
      */
-    app.use('/graphs/:graphid/edit',
+    app.get('/graphs/:graphid/edit',
         getGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
@@ -55,13 +50,12 @@ module.exports = function (app) {
     /**
      * Delete a graph GET
      */
-    app.use('/graphs/:graphid/delete',
+    app.get('/graphs/:graphid/delete',
         //get vertex and edge ids
         getGraphMW(objectRepository),
         deleteVertexMW(objectRepository),
         deleteEdgeMW(objectRepository),
         deleteGraphMW(objectRepository),
-        renderMW(objectRepository, 'delete a graph'),
         function (req, res, next) {
             return res.redirect('/graphs');
         }
@@ -70,7 +64,7 @@ module.exports = function (app) {
     /**
      * View a graph GET
      */
-    app.use('/graphs/:graphid/details',
+    app.get('/graphs/:graphid/details',
         getGraphMW(objectRepository),
         getVertexMW(objectRepository),
         getEdgeMW(objectRepository),
@@ -80,7 +74,7 @@ module.exports = function (app) {
     /**
      * List all graphs GET
      */
-    app.use('/graphs',
+    app.get('/graphs',
         listGraphMW(objectRepository),
         renderMW(objectRepository, 'graphs')
     );

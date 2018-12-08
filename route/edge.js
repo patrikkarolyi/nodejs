@@ -5,11 +5,12 @@ var updateGraphMW = require('../middleware/graphs/updateGraph');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 var createEdgeMW = require('../middleware/edges/createEdge');
 
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
+
 module.exports = function (app) {
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
 
     ///graph routes
     var objectRepository = {
@@ -21,25 +22,25 @@ module.exports = function (app) {
     /**
      * Add new edge GET/post
      */
-    app.get('/graphs/:graphid/edit/edges/new',
+    app.post('/graphs/:graphid/edit/edges/new',
         ///TODO check if vertices exist
-        createEdgeMW(objectRepository),
         getGraphMW(objectRepository),
+        createEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/' +req.params.graphid+ '/edit');
         }
     );
 
     /**
      * Delete an edge GET
      */
-    app.use('/graphs/:graphid/edit/edges/:edgeid/delete',
-        deleteEdgeMW(objectRepository),
+    app.get('/graphs/:graphid/edit/edges/:edgeid/delete',
         getGraphMW(objectRepository),
+        deleteEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/'+req.params.graphid+'/edit');
         }
     );
 

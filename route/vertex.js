@@ -5,13 +5,14 @@ var updateGraphMW = require('../middleware/graphs/updateGraph');
 var deleteVertexMW = require('../middleware/vertices/deleteVertex');
 var createVertexMW = require('../middleware/vertices/createVertex');
 
+var getEdgeMW = require('../middleware/edges/getEdge');
 var deleteEdgeMW = require('../middleware/edges/deleteEdge');
 
-module.exports = function (app) {
+var graphModel = require('../models/graph');
+var vertexModel = require('../models/vertex');
+var edgeModel = require('../models/edge');
 
-    var graphModel = {};
-    var vertexModel = {};
-    var edgeModel = {};
+module.exports = function (app) {
 
     ///vertex routes
     var objectRepository = {
@@ -21,27 +22,29 @@ module.exports = function (app) {
     };
 
     /**
-    * Add new vertex GET/PUSH
+    * Add new vertex POST
     */
-    app.use('/graphs/:graphid/edit/vertice/new',
-        createVertexMW(objectRepository),
+    app.post('/graphs/:graphid/edit/vertices/new',
         getGraphMW(objectRepository),
+        createVertexMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/'+ req.params.graphid +'/edit');
         }
     );
+
 
     /**
      * Delete a vertex and edges related to it GET
      */
-    app.use('/graphs/:graphid/edit/vertices/:vertexid/delete',
-        deleteEdgeMW(objectRepository),
-        deleteVertexMW(objectRepository),
+    app.get('/graphs/:graphid/edit/vertices/:vertexid/delete',
         getGraphMW(objectRepository),
+        deleteVertexMW(objectRepository),
+        getEdgeMW(objectRepository),
+        deleteEdgeMW(objectRepository),
         updateGraphMW(objectRepository),
         function (req, res, next) {
-            return res.redirect('/graphs/:graphid/edit');
+            return res.redirect('/graphs/'+ req.params.graphid +'/edit');
         }
     );
 

@@ -6,32 +6,28 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    //var graphModel = requireOption(objectrepository, 'graphModel');
+    //TODO ASYNC FETCH
+    var graphModel = requireOption(objectrepository, 'graphModel');
+    var result =[];
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
         
-        res.tlp.graphModel = [
-            {
-                id: 1,
-                name: "elsografom",
-                desc: "Itt valami értelmes komment fog megjelenni!",
-                created: "2018.01.01"
-            },
-            {
-                id: 2,
-                name: "masodikgrafom",
-                desc: "Kell egy description!",
-                created: "2018.01.02"
-            },
-            {
-                id: 3,
-                name: "harmadikgrafom",
-                desc: "A komment.",
-                created: "2018.01.03"
+        /*graphModel.find({},function (err, graphs) {
+            if(err){
+                return next(err);
             }
-        ];
+            res.tlp.graphs = graphs;
+            return next();
+        });*/
 
-        return next();
+        try {
+            res.tlp.graphs = await graphModel.find();
+            next();
+        }catch (e) {
+            return next(e);
+        }
+
+
     };
 
 };

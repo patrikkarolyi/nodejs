@@ -5,13 +5,20 @@
   <link rel="stylesheet" type="text/css" media="screen" href="/popupwindow.css" />
 
   <!-- Title section -->
-  <section class="jumbotron text-center">
+  <div class="jumbotron">
     <div class="container">
-      <h1 class="jumbotron-heading">
+      <h1 class="display-3">
         <font color="blue">Graph Viewer</font>
       </h1>
+      <p>This is a list of graphs. You can do things here. 
+      <br> First of all, you can make a new one by clicking "New Graph". 
+      <br> Every Graph consist vertices and edges which can be edited in "Edit".
+      <br> You can check them in drawn form in "View".
+      <br> Or just remove them.
+      </p>
     </div>
-  </section>
+  </div>
+
 
 
   <!-- Cardviews -->
@@ -19,24 +26,26 @@
     <div class="container">
       <div class="row">
 
-        <% data.graphModel.forEach(function(valami){ %>
+        <% data.graphs.forEach(function(graph){ %>
         <div class="col-md-12">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
               <p class="card-title">
-                <%= valami.name %>
+                <%= graph.name %>
               </p>
               <p class="card-text">
-                <%= valami.desc %>
+                <%= graph.comment %>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/details" %> id="btn_details">View</a>
-                  <a class="btn btn-sm btn-outline-secondary" href=<%= "graphs/" + valami.id + "/edit" %> id="btn_edit">Edit</a>
-                  <a class="btn btn-sm btn-outline-secondary" onclick="showPopup()">Delete</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%="graphs/" + graph._id + "/details" %>
+                    id="btn_details">View</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%="graphs/" + graph._id + "/edit" %>
+                    id="btn_edit">Edit</a>
+                  <a class="btn btn-sm btn-outline-secondary" href=<%="graphs/" + graph._id + "/delete" %>>Delete</a>
                 </div>
                 <small class="text-muted">Created on :
-                  <%= valami.created %> </small>
+                  <%= graph.date %> </small>
               </div>
             </div>
           </div>
@@ -58,7 +67,7 @@
       <span class="close">&times;</span>
       <p>Are you sure about that ?</p>
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="popup_ok_btn">OK</button>
+
         <button type="button" class="btn btn-sm btn-outline-secondary" id="popup_cancel_btn">Cancel</button>
       </div>
     </div>

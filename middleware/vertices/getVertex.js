@@ -6,42 +6,33 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    //var graphModel = requireOption(objectrepository, 'graphModel');
+    var vertexModel = requireOption(objectrepository, 'vertexModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
 
-        res.tlp.vertexModel = [
-            {
-                id: 0,
-                name: "pomelo_csucs"
-            },
-            {
-                id: 1,
-                name: "narancs_csucs"
-            },
-            {
-                id: 2,
-                name: "citrom_csucs"
-            },
-            {
-                id: 3,
-                name: "dinnye_csucs"
-            },
-            {
-                id: 4,
-                name: "alma_csucs"
-            },
-            {
-                id: 5,
-                name: "korte_csucs"
-            },
-            {
-                id: 6,
-                name: "banan_csucs"
+        try {
+
+            async function asyncForEach(array, callback) {
+                for (let index = 0; index < array.length; index++) {
+                    await callback(array[index], index, array);
+                }
             }
-        ];
 
-        return next();
+            const start = async() => {
+                res.tlp.vertices = [];
+
+                await asyncForEach(res.tlp.graph._vertices, async  (vertexid) =>  {
+                    var vertexObject = await vertexModel.findOne({_id: vertexid});
+                    if(vertexObject)
+                    res.tlp.vertices.push(vertexObject);
+                });
+                next();
+            };
+            start();
+        } catch (e) {
+            return next(e);
+        }
+
     };
 
 };

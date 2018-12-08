@@ -8,7 +8,14 @@ module.exports = function (objectrepository) {
 
     var graphModel = requireOption(objectrepository, 'graphModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
+
+        var graph = res.tlp.graph;
+
+        await graph.save(function (err) {
+            console.log(graph.name + " updated as a graph.")
+        });
+
 
         return next();
     };

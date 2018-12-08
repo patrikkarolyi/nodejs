@@ -1,61 +1,99 @@
 <% include header %>
 
-<h1>Edit Graph</h1>
+
 
 <div class="container">
+        <h1>Edit Graph</h1>
+
+        <p>You can start creating vertices and edges here!
+                <br> A vertex needs only a name. However an edge needs 2 vertices.
+                <br> If a vertex gets deleted then all the edges too which are made up of that vertex.
+            </p>
+
     <div class="row">
         <div class="col-md-push-3 col-md-6 col-xs-12">
             <h2>Vertices</h2>
             <table class="table table-stripped">
                 <tbody>
-                    <% data.vertexModel.forEach(function(vertex){ %>
+                    <% data.vertices.forEach(function(vertex){ %>
                     <tr>
                         <td>
                             <%= vertex.name %>
                         </td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href= <%= "/graphs/" +data.graph._id+ "/edit/vertices/"+vertex._id+"/delete" %>  class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <div class="text-center">
-                <a onclick="goBack()" class="btn btn-lg btn-success">New vertex</a>
+            <div class="container">
+                <form class="form-horizontal" method="POST" action=<%="/graphs/"+  data.graph._id  + "/edit/vertices/new" %>>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input name="vertexname" type="text" class="form-control" placeholder="Enter the name of the vertex">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button class="btn btn-lg btn-success">New vertex</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-md-push-3 col-md-6 col-xs-12">
             <h2>Edges</h2>
             <table class="table table-stripped">
                 <tbody>
-                        <% data.edgeModel.forEach(function(edge){ %>
+                    <% data.edges.forEach(function(edge){ %>
                     <tr>
-                        <td><%= data.vertexModel[edge.a].name %></td>
-                        <td><%= data.vertexModel[edge.b].name %></td>
+                        <td>
+                            <%= data.vertices.filter(function (element) {return element.id == edge._a;})[0].name %>
+                        </td>
+                        <td>
+                            <%= data.vertices.filter(function (element) {return element.id == edge._b;})[0].name %>
+                        </td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href= <%= "/graphs/" +data.graph._id+ "/edit/edges/"+edge._id+"/delete" %>  class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <div class="text-center">
-                <a onclick="goBack()" class="btn btn-lg btn-success">New edge</a>
+            <div class="container">
+                <form class="form-horizontal" method="POST" action=<%="/graphs/"+  data.graph._id  + "/edit/edges/new" %> >
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <select class="custom-select d-block w-100" name=selectora id="vertexa">
+                                    <% data.vertices.forEach(function(vertex){ %>
+                                    <option value=<%=vertex._id %>>
+                                        <%= vertex.name %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <select class="custom-select d-block w-100" name=selectorb id="vertexb">
+                                    <% data.vertices.forEach(function(vertex){ %>
+                                    <option value=<%=vertex._id %>>
+                                        <%= vertex.name %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button class="btn btn-lg btn-success">New edge</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
         </div>
     </div>
 
-    <button class="btn btn-sm btn-warning" onclick="goBack()">Go Back</button>
-    <!-- end of view -->
-
-
-    <script src="js/bootstrap.js"></script>
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-    </body>
-
-    </html>
+    <a class="btn btn-sm btn-warning" href="../../">Go Back</button>
+    <% include footer %>

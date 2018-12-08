@@ -8,11 +8,16 @@
 
 <h1>Graph details</h1>
 
+<p>This screen was made with p5js.
+		<br> You can move these vertices!
+		<br> And if you hover over them the cursor you can see their names too!
+	</p>
+
 <div class="row">
 	<script>
-		vertices = <%- JSON.stringify(data.vertexModel) %>
+		vertices = <%- JSON.stringify(data.vertices) %>
 
-		edges = <%- JSON.stringify(data.edgeModel) %>
+		edges = <%- JSON.stringify(data.edges) %>
 					
 		var r = 50;
 		var xOffset = 0.0;
@@ -40,9 +45,13 @@
 
 		function makeEdgeRefrences() {
 			edges.forEach(function (edge) {
-				edge.a = vertices[edge.a]
-				edge.b = vertices[edge.b]
+				edge.a = vertices[getVertexIndexById(edge._a)]
+				edge.b = vertices[getVertexIndexById(edge._b)]
 			});
+		}
+
+		function getVertexIndexById(id){
+            return vertices.findIndex(x => x._id==id);
 		}
 
 

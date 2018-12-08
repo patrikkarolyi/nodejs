@@ -6,9 +6,12 @@ var requireOption = require('../common').requireOption;
 
 module.exports = function (objectrepository) {
 
-    //var graphModel = requireOption(objectrepository, 'graphModel');
+    var graphModel = requireOption(objectrepository, 'graphModel');
 
-    return function (req, res, next) {
+    return async function (req, res, next) {
+
+        console.log("deleted graph: " + req.params.graphid);
+        await graphModel.remove({ _id: req.params.graphid });
 
         return next();
     };
