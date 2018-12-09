@@ -34,7 +34,7 @@ module.exports = function (objectrepository) {
                 return edge._a == req.params.vertexid || edge._b == req.params.vertexid
             });
 
-            asyncForEach(edgesToDelete, async function (edge) {
+            await asyncForEach(edgesToDelete, async function (edge) {
 
                 //delete from graph
                 var index = res.tlp.graph._edges.indexOf(edge._id);
@@ -47,7 +47,6 @@ module.exports = function (objectrepository) {
                 console.log("deleted edge: " + edge._id + " due to vertex delete");
                 await edgeModel.deleteOne({_id: edge._id});
             });
-
         }
         return next();
     };
